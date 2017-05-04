@@ -7,5 +7,11 @@
 <body>
     Hello world!
     <p>{{ message }}回目のアクセス</p>
+
+    <ul>
+        {% for tweet in tweets %}
+        <li>{{ tweet }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
