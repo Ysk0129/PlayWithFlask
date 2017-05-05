@@ -2,3 +2,7 @@ flask
 redis
 requests
 requests_oauthlib
+mecab-python3
+scipy
+numpy
+sklearn
