@@ -1,4 +1,6 @@
 import MeCab
+import re
+from sklearn.feature_extraction.text import CountVectorizer
 
 class WordProcessing:
 
@@ -11,6 +13,15 @@ class WordProcessing:
             parsed = i.split("\t")
             if len(parsed) == 6:
                 if parsed[3].startswith("名詞") | parsed[3].startswith("動詞") | parsed[3].startswith("形容詞"):
-                    words.append(parsed[2])
-        
+                    if re.search(r'[a-xA-Z0-9_]' ,parsed[2]) == None:
+                        words.append(parsed[2])                     
         return words
+
+    def count_words(self, words):
+        vec = CountVectorizer()
+        vec.fit(words)
+        terms = vec.get_feature_names()
+        words_str = " ".join(words)
+        transform = vec.transform([words_str])
+        words_dic = dict(zip(terms, transform.toarray()[0]))
+        return sorted(words_dic.items(), reverse=True, key=lambda x: x[1])

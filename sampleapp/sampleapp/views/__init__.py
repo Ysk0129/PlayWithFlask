@@ -3,12 +3,23 @@ from flask import render_template
 from sampleapp.twconfig import twkeys
 from sampleapp.models.count import Counter
 from sampleapp.models.twitterapi import TwitterAPI
+from sampleapp.models.wordprocessing import WordProcessing
 
 @app.route('/')
 def index():
+    message = {}
     counter = Counter()
     counter.incrCount()
-    count = counter.getCount()
+    message["count"] = counter.getCount()
+
+    message["name"] = "@pref_saitama"
     twitter = TwitterAPI(twkeys["ConsumerKey"], twkeys["ConsumerSecret"], twkeys["AccessToken"], twkeys["AccessTokenSecret"])
-    tweets = twitter.get_user_tweets("@pref_saitama")
-    return render_template('index.html', message=count, tweets=tweets)
+    message["tweets"] = twitter.get_user_tweets(message["name"])
+
+    words = []
+    wp = WordProcessing()
+    for tweet in message["tweets"]:
+        words.extend(wp.separate_words(tweet))
+    message["words"] = wp.count_words(words)
+
+    return render_template('index.html', message=message)

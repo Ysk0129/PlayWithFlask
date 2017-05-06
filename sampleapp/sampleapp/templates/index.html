@@ -6,10 +6,15 @@
 </head>
 <body>
     Hello world!
-    <p>{{ message }}回目のアクセス</p>
-
+    <p>{{ message.count }}回目のアクセス</p>
+    <p>{{ message.name }}さんのつぶやき頻出ワード</p>
+    <ol type="1">
+        {% for i in range(10) %}
+        <li>{{ message.words[i][0] }} : {{ message.words[i][1] }} 回</li>
+        {% endfor %}
+    </ol>
     <ul>
-        {% for tweet in tweets %}
+        {% for tweet in message.tweets %}
         <li>{{ tweet }}</li>
         {% endfor %}
     </ul>
