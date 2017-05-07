@@ -4,6 +4,7 @@ from sampleapp.twconfig import twkeys
 from sampleapp.models.count import Counter
 from sampleapp.models.twitterapi import TwitterAPI
 from sampleapp.models.wordprocessing import WordProcessing
+from sampleapp.models.datacache import DataCache
 
 @app.route('/')
 def index():
@@ -21,5 +22,8 @@ def index():
     for tweet in message["tweets"]:
         words.extend(wp.separate_words(tweet))
     message["words"] = wp.count_words(words)
+
+    cache = DataCache()
+    cache.save(message["name"], message["tweets"])
 
     return render_template('index.html', message=message)
