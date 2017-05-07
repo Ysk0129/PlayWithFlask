@@ -24,6 +24,6 @@ def index():
     message["words"] = wp.count_words(words)
 
     cache = DataCache()
-    cache.save(message["name"], message["tweets"])
+    cache.save_list(message["name"], message["tweets"])
 
     return render_template('index.html', message=message)
