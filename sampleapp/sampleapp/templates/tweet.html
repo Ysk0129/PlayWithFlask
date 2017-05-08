@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <p>{{ message.name }}さんのつぶやき頻出ワード</p>
+    <ol type="1">
+        {% for i in range(10) %}
+        <li>{{ message.words[i][0] }} : {{ message.words[i][1] }} 回</li>
+        {% endfor %}
+    </ol>
+        {% for tweet in message.tweets %}
+        <li>{{ tweet }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

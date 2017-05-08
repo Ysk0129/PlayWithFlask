@@ -1,5 +1,6 @@
 from sampleapp import app
 from flask import render_template
+from flask import request
 from sampleapp.twconfig import twkeys
 from sampleapp.models.count import Counter
 from sampleapp.models.twitterapi import TwitterAPI
@@ -13,10 +14,16 @@ def index():
     counter.incrCount()
     message["count"] = counter.getCount()
 
-    message["name"] = "@pref_saitama"
+    return render_template('index.html', message=message)
+
+@app.route('/tweet',  methods=['POST'])
+def tweet():
+    message = {}
+
+    message["name"] = request.form["name"]
     twitter = TwitterAPI(twkeys["ConsumerKey"], twkeys["ConsumerSecret"], twkeys["AccessToken"], twkeys["AccessTokenSecret"])
     message["tweets"] = twitter.get_user_tweets(message["name"])
-
+    
     words = []
     wp = WordProcessing()
     for tweet in message["tweets"]:
@@ -26,4 +33,4 @@ def index():
     cache = DataCache()
     cache.save_list(message["name"], message["tweets"])
 
-    return render_template('index.html', message=message)
+    return render_template('tweet.html', message=message)
