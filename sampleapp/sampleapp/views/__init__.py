@@ -29,6 +29,7 @@ def tweet():
     for tweet in message["tweets"]:
         words.extend(wp.separate_words(tweet))
     message["words"] = wp.count_words(words)
+    message["wloop"] = 10 if len(message["words"]) >= 10 else len(message["words"])
 
     cache = DataCache()
     cache.save_list(message["name"], message["tweets"])

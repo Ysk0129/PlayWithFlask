@@ -6,11 +6,15 @@
 </head>
 <body>
     <p>{{ message.name }}さんのつぶやき頻出ワード</p>
+    {% if message.words|length == 0 %}
+    <p>有効な単語が抽出できませんでした</p>
+    {% else %}
     <ol type="1">
-        {% for i in range(10) %}
+        {% for i in range(message.wloop) %}
         <li>{{ message.words[i][0] }} : {{ message.words[i][1] }} 回</li>
         {% endfor %}
     </ol>
+    {% endif %}
         {% for tweet in message.tweets %}
         <li>{{ tweet }}</li>
         {% endfor %}
