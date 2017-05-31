@@ -13,9 +13,12 @@ class WordProcessing:
             parsed = i.split("\t")
             if len(parsed) == 6:
                 if parsed[3].startswith("名詞") | parsed[3].startswith("動詞") | parsed[3].startswith("形容詞"):
-                    if len(parsed[2]) >= 2 or re.search(r'[一-龥]' ,parsed[2]) != None:
-                        if re.search(r'[a-xA-Z0-9_!-/:-@[-`{-~]' ,parsed[2]) == None and re.match(r'[ぁ-ん]{2}' ,parsed[2]) == None:
-                            words.append(parsed[2])                  
+                    
+                    invalid_pattern = re.compile(r"([a-xA-Z0-9_!-/:-@[-`{-~]+)|([ぁ-ん]{1,2})")
+                    valid_pattern = re.compile(r"(.{2,})|([一-龥].*)")
+                    if re.fullmatch(valid_pattern, parsed[2]) is not None and re.fullmatch(invalid_pattern, parsed[2]) is None:
+                        words.append(parsed[2])
+
         return words
 
     def count_words(self, words):
