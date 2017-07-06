@@ -6,7 +6,6 @@ RUN cd /opt && \
     cd /opt/mecab/mecab && \
     ./configure --with-charset=utf8 && \
     make && \
-    make check && \
     make install && \
     echo "/usr/local/lib" >> /etc/ld.so.conf && \
     ldconfig
@@ -16,7 +15,6 @@ RUN cd /opt && \
     cd mecab-ipadic-2.7.0-20070801 && \
     ./configure --with-charset=utf8 && \
     make && \
-    make check && \
     make install
 RUN pip install -r requirements.txt
 
