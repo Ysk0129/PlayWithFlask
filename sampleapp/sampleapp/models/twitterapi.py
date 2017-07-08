@@ -20,7 +20,7 @@ class TwitterAPI:
     def get_user_tweets(self, screen_name):
         params = {
             "screen_name": screen_name,
-            "count"      : 200,
+            "count"      : 200
             }
         endpoint = "https://api.twitter.com/1.1/statuses/user_timeline.json"
         req = self.oauth_session.get(endpoint, params = params)
