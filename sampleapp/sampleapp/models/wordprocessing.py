@@ -10,7 +10,7 @@ class WordProcessing:
     def separate_words(self, sentence):
         words = []
         validword_pattern = re.compile(r"(.{2,})|([一-龥].*)")
-        invalidword_pattern = re.compile(r"([a-xA-Z0-9_!-/:-@[-`{-~]+)|([ぁ-ん]{1,2})")
+        invalidword_pattern = re.compile(r"([a-zA-Z0-9_!-/:-@[-`{-~]+)|([ぁ-ん]{1,2})")
         
         for i in self.tagger.parse(sentence).split("\n"):
             parsed = i.split("\t")
