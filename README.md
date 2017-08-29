@@ -8,3 +8,9 @@ Flask と Redis を遊びながら勉強する
 ```
 docker-compose up
 ```
+
+# How to start the application
+
+```
+python runserver.py
+```
