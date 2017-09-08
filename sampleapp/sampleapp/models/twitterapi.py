@@ -12,8 +12,7 @@ class TwitterAPI:
         tweetslist = []
         if req.status_code == 200:
             timeline = json.loads(req.text)
-            for tweet in timeline["statuses"]:
-                tweetslist.append(tweet["text"])
+            tweetslist = [tweet["text"] for tweet in timeline["statuses"]]
         
         return tweetslist
     
