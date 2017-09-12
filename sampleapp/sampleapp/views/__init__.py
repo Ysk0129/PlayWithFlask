@@ -26,8 +26,7 @@ def tweet():
     
     words = []
     wp = WordProcessing()
-    for tweet in message["tweets"]:
-        words.extend(wp.separate_words(tweet))
+    [words.extend(wp.separate_words(tweet)) for tweet in message["tweets"]]
     message["words"] = wp.count_words(words)
     message["wloop"] = 10 if len(message["words"]) >= 10 else len(message["words"])
 
