@@ -12,5 +12,4 @@ if __name__ == "__main__":
                 wago.append("SET " + "\"" + key + "\"" + " " + "\"" + value + "\"" + "\r\n")
 
     with open("evaluation_dictionary.txt", "w") as f:
-        for l in wago:
-            f.write(l)
+        [f.write(l) for l in wago]
